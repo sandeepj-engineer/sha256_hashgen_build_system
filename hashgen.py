@@ -2,6 +2,9 @@ import hashlib
 import os
 import sys
 
+# Default generated folder
+DEFAULT_GEN_FOLDER = "_builds/_out"
+
 def compute_hash(folder):
     hasher = hashlib.sha256()
 
@@ -16,11 +19,8 @@ def compute_hash(folder):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python hashgen.py <generated_folder_path>")
-        return
-
-    folder = sys.argv[1]
+    # Use argument if provided, otherwise default
+    folder = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_GEN_FOLDER
 
     if not os.path.isdir(folder):
         print(f"ERROR: Folder '{folder}' not found.")
